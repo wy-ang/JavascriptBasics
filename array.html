@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	增删:<div id="view"></div>
+	合并:<div id="concatArr"></div>
+	查找:<div id="sliceArr"></div>
+	排序:<div id="sortArrNum"></div>
+	<div id="sortArrStr"></div>
+	倒序:<div id="reverseArr"></div>
+	转换:<div id="joinArr"></div>
+	<script>
+		var arrStr = ['head','title','body','Document','arr','var'];
+		var arrNum = [1,2,3,4,5,6];
+		var sortArrNum = [1,10,23,22,5,7,3,8,,12];
+		var sortArrStr = ['b','d','e','g','i','f','a','h','c','l','k','j'];
+		var reverseArr = ['阿拉善','独孤求败','姑苏慕容','宫','商','角','徵','羽','丽萨','Lisa','李叔同','美特斯邦威'];
+
+		/* 添加 [增] */
+		arrStr.push('我是追加在后面的');//追加,返回数组的新长度,会改变原数组                 [在后面添加]
+		arrStr.unshift('我是在前面添加的') //添加的数组的前面,返回数组的新长度,会改变原数组  [在前面添加]
+
+		/* 删除 [删] */
+		arrStr.pop();//删除最后一个元素,并返回该元素,会改变原数组                            [删除最后一个元素]
+		arrStr.shift();//删除最前面的一个元素,并返回该元素,会改变原数组                      [删除第一个元素]
+
+		/* 替换 [改] */
+		arrStr.splice(1,2,'我是替换的新值1','我是替换的新值2'); //返回被删除的元素,会改变原数组 参数:[要删除的开始下标,要删除的结束下标(设置为0不会删除项目,该方法也会变成插入),要替换/插入的内容]
+
+		/* 查找 [查] */
+		var sliceArr = arrNum.slice(0,2); //返回一个子数组,不会改变原数组
+
+		/* 排序 [改] */
+		var sortArrNumber = sortArrNum.sort(sortNumber); //会改变原数组
+		var sortArrString = sortArrStr.sort(); // 需要注意转换规则
+
+		/* 倒序 [改]*/
+		var reverseArray = reverseArr.reverse();  //会改变原数组
+
+		function sortNumber(a,b){
+			return a - b;
+		}
+
+		/* 合并 */
+		var concatArr = arrStr.concat(arrNum);  //返回新数组,不会改变原数组
+
+		/* 转换 */
+		var joinArr = arrStr.join();
+
+		console.log(arrStr.constructor.name);
+		document.getElementById('view').innerHTML = arrStr;
+		console.log(arrStr);
+		document.getElementById('concatArr').innerHTML = concatArr;
+		console.log(concatArr);
+		document.getElementById('sliceArr').innerHTML = sliceArr;
+		console.log(sliceArr);
+		document.getElementById('sortArrNum').innerHTML = sortArrNumber;
+		console.log(sortArrNumber);
+		document.getElementById('sortArrStr').innerHTML = sortArrString;
+		console.log(sortArrString);
+		document.getElementById('reverseArr').innerHTML = reverseArray;
+		console.log(reverseArray);
+		document.getElementById('joinArr').innerHTML = typeof joinArr;
+		console.log(joinArr);
+		console.log(...arrNum);
+		
+	</script>
+</body>
+</html>
