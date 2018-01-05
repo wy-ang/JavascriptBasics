@@ -50,6 +50,12 @@
 		/* 转换 */
 		var joinArr = arrStr.join();
 
+		/* 复制 */
+		var concatArrStr = arrStr.concat();   //concat不传参可以当做复制来用
+		var sliceArrStr = arrStr.slice();	 //slice不传参可以当做复制来用
+		console.log(concatArrStr); 
+		console.log(sliceArrStr); 
+
 		console.log(arrStr.constructor.name);
 		document.getElementById('view').innerHTML = arrStr;
 		console.log(arrStr);
@@ -66,7 +72,64 @@
 		document.getElementById('joinArr').innerHTML = typeof joinArr;
 		console.log(joinArr);
 		console.log(...arrNum);
+
+		console.time('arr');
+		function removeRepeator (oldArr){
+			var newArr = [];
+			for (var i = 0;i<oldArr.length;i++){
+				if(!isHasThisVal(newArr,oldArr[i])){
+					newArr.push(oldArr[i]);
+				}
+			}
+			return newArr;
+		}
+
+		function isHasThisVal (newArr,val){
+			for (var i = 0; i < newArr.length; i++) {
+				if(newArr[i]==val){
+					return true;
+				}
+			}
+			return false;
+		}
 		
+
+		var mathArr1 = [];
+		var math1 = parseInt(Math.random()*10000);
+		for(var i=0;i<10000;i++){
+			mathArr1.push(math1);
+		}
+		console.log(mathArr1);
+
+		var newArr = removeRepeator(mathArr1);
+		console.log(newArr);
+		console.timeEnd('arr');
+
+
+		console.time('obj');
+		Array.prototype.removal = function(){
+			var newArr = [];
+			var obj = {};
+			for(var i=0;i<this.length;i++){
+				if(!obj[this[i]]){
+					newArr.push(this[i]);
+					obj[this[i]] = true;
+				}
+			}
+			return newArr;
+		}
+
+		
+		var mathArr = [];
+		var math = parseInt(Math.random()*10000);
+		for(var i=0;i<10000;i++){
+			mathArr.push(math);
+		}
+		console.log(mathArr);
+
+		var a = mathArr.removal();
+		console.log(a);
+		console.timeEnd('obj');
 	</script>
 </body>
 </html>
