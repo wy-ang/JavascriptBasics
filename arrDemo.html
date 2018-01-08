@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组去重</title>
+</head>
+<body>
+	 <script>
+	 	console.time('arr');
+		 	var removal = function(oldArr){
+		 		var newArr = [];  							//定义一个新数组
+		 		for (var i = 0; i < oldArr.length; i++) {	//循环要去重的数组
+		 			if(!isHasThisArr(newArr,oldArr[i])){	//判断新数组的每个元素和要去重数组中的每个元素是否相等[注意:一定要使用全等号,否则数组元素会进行隐式转换,导致字符串和数字一样的情况下被去重掉]
+		 				newArr.push(oldArr[i]);				//将不相等的值添加到新数组中
+		 			}
+		 		}
+		 		return newArr;
+		 	}
+
+		 	var isHasThisArr  = function(newArr,oldArr){
+		 		for (var i = 0; i < newArr.length; i++) {
+		 			if(newArr[i]===oldArr){
+		 				return true;
+		 			}
+		 		}
+		 		return false;
+		 	}
+
+		 	var arrNum = [1,2,1,'2',1,3,4,3,2,1,5,6,5,4,5,6,7,8,9,0,8,6,6,5,'5',4,4,3];
+		 	var removalArr = removal(arrNum);
+		 	console.log(removalArr);
+	 	console.timeEnd('arr');
+
+	 	console.time('arr');
+		 	Array.prototype.removal = function(){
+		 		if(this.length==0){
+		 			return;
+		 		}
+		 		var newArr = [this[0]];							//创建新数组,并将要去重数组的第一个元素作为值
+		 		for (var i = 0; i < this.length; i++) {			//循环要去重的数组
+		 			var isBoolean = false;						//声明一个值为false的变量
+		 			for (var j = 0; j < newArr.length; j++) {	//循环新数组
+		 				if(newArr[j]===this[i]){				//判断新数组的每个元素和要去重数组中的每个元素是否相等[注意:一定要使用全等号,否则数组元素会进行隐式转换,导致字符串和数字一样的情况下被去重掉]
+		 					isBoolean = true;					//重置变量值为true
+		 					break;								//跳出新数组的循环
+		 				}
+		 			}
+		 			if(!isBoolean){								
+		 				newArr.push(this[i]);					//将不相等的值添加到新数组中 
+		 			}
+		 		}
+		 		return newArr;
+		 	}
+
+		 	var arrStr = [1,'1',2,'2',1,2,1,3,4,3,2,1,5,6,5,4,5,6,7,8,9,0,8,6,6,5,5,4,4,3,'a','2','3','a'];
+		 	var removalStrArr = arrStr.removal();
+		 	console.log(removalStrArr);
+	 	console.timeEnd('arr');
+
+
+	 	console.time('indexOf');
+	 		//利用数组的indexOf方法
+		 	Array.prototype.removalArray = function(){
+		 		var newArr = [];
+		 		for (var i = 0; i < this.length; i++) {
+		 			if(newArr.indexOf(this[i]) == -1){  //indexOf 不兼容IE8及以下 
+		 				newArr.push(this[i]);
+		 			}
+		 		}
+		 		return newArr;
+		 	}
+
+		 	var a = [1,2,1,2,3,'3',4,5,6,6,6];
+		 	var b = a.removalArray();
+		 	console.log(b);
+		console.timeEnd('indexOf');
+
+
+		console.time('removalObj');
+			//利用hash表,可能会出现字符串和数字一样的话出错，如var a = [1, 2, 3, 4, '3', 5],会返回[1, 2, 3, 4, 5]
+			Array.prototype.removalObj = function(){
+				var newArr = [];
+				var ObjArr = {};
+				for (var i = 0; i < this.length; i++) {
+					if(!ObjArr[this[i]]){
+						ObjArr[this[i]] = true;
+						newArr.push(this[i]);
+					}
+				}
+				return newArr;
+			}
+
+			var objArray = [1,2,1,2,3,'3',4,5,6,6,6];
+			var removalObjArray = objArray.removalObj();
+			console.log(removalObjArray);
+			console.timeEnd('removalObj');
+
+			Array.prototype.remove = function(val){
+				for (var i = 0; i < this.length; i++) {
+					if(this[i] === val){
+						this.splice(i,1);
+						break;
+					}
+				}
+				return this;
+			}
+
+
+			var re = [1,2,3,4,5,'3','6'];
+			var res = re.remove('3');
+			console.log(res);
+
+	 </script>
+</body>
+</html>
