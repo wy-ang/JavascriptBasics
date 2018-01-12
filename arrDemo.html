@@ -95,6 +95,7 @@
 			console.log(removalObjArray);
 			console.timeEnd('removalObj');
 
+			//删除指定元素
 			Array.prototype.remove = function(val){
 				for (var i = 0; i < this.length; i++) {
 					if(this[i] === val){
@@ -105,10 +106,23 @@
 				return this;
 			}
 
-
 			var re = [1,2,3,4,5,'3','6'];
 			var res = re.remove('3');
 			console.log(res);
+
+			//取最大值
+			Array.prototype.max = function(){
+				var max = this[0];
+				for (var i = 0; i < this.length; i++) {
+					if(this[i] > max){
+						max = this[i];
+					}
+				}
+				return max;
+			}
+
+			var arrMax = [1,2,2,3,,6,7,89,9,5,5,3,21];
+			console.log(arrMax.max());
 
 	 </script>
 </body>
