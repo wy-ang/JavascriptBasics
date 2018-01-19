@@ -130,6 +130,13 @@
 		var a = mathArr.removal();
 		console.log(a);
 		console.timeEnd('obj');
+
+		function isArray (val){
+			var isTrue = typeof val == 'object' && val.constructor == Array;
+			return isTrue?true:false;
+		}
+		var arr = isArray([1,2,3,4,5]);
+		console.log(arr);
 	</script>
 </body>
 </html>

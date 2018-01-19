@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>text</title>
+</head>
+<body>
+	<p>变量对象是一个抽象概念中的"对象",它用于存储,VO按照如下执行顺序填充:</p>
+	<ul>
+		<li>1.函数参数(若为传入,初始化该参数值为undefined)</li>
+		<li>2.函数声明(若发生命名冲突,会覆盖)</li>
+		<li>3.变量(初始化变量值为undefined,若发生命名冲突,会忽略)</li>
+		<pre>
+			AO(test)={
+				a:10,
+				b:undefined,
+				c:undefined,
+				d:<\ref to func "d"\>
+				e:undefined
+			}
+		</pre>
+	</ul>
+	<script>
+		//变量对象 (variable object)
+		console.log(a);	//函数名提升,弹出a函数的代码 这里的a是函数的引用,不是执行函数a
+		a();	//执行函数a
+		var a=3;
+		function a(){
+			console.log(a);	//由于函数名提升,所以这里的a弹出的还是函数a的代码(函数a的引用),不是执行函数a
+			console.log(1);
+		}
+		console.log(a);	//由于函数提升优先级高于变量提升所以这里的a才能弹出3
+		a=6;
+		a();	//这个时候的a是变量a,值为6.所以报错:Uncaught TypeError: a is not a function
+
+		// 执行上下文 (execution context)
+		/*var fun0 = 'global context';
+		console.log(fun0);
+
+		function fun1(){
+			console.log('fun1');
+			function fun2(){
+				console.log('fun2');
+				function fun3(){
+					console.log('fun3');
+				}
+				fun3();
+			}
+			fun2();
+		}
+		fun1();*/
+	</script>
+</body>
+</html>
